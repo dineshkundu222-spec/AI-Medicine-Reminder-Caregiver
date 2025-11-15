@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Score</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section class="container" style="max-width:700px;margin:auto;padding:40px;text-align:center;">
+    <h1 id="score-title"></h1>
+    <p id="score-desc"></p>
+
+    <div style="margin:20px 0; padding:20px; background:#f0f0f0; border-radius:8px;">
+        <h2 id="final-score"></h2>
+    </div>
+
+    <a href="https://tally.so/r/0QrjQy" class="cta-button">Join Early Access</a>
+</section>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const score = Number(params.get("score")) || 0;
+
+document.getElementById("final-score").textContent = `Your Score: ${score}/100`;
+
+let title = "";
+let desc = "";
+
+if (score >= 75) {
+    title = "You're doing well! ✅";
+    desc = "Just a few tweaks needed to reach perfect medicine safety.";
+} else if (score >= 40) {
+    title = "Moderate Risk ⚠️";
+    desc = "You could benefit from reminders and caregiver alerts.";
+} else {
+    title = "High Risk 🚨";
+    desc = "You frequently miss doses. A reminder + caregiver system is urgently needed.";
+}
+
+document.getElementById("score-title").textContent = title;
+document.getElementById("score-desc").textContent = desc;
+</script>
+
+</body>
+</html>
