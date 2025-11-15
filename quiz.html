@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Safety Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section class="container" style="max-width:700px;margin:auto;padding:40px;">
+    <h1>Medicine Safety Assessment</h1>
+    <p>This 2-minute quiz will check if you or your loved one are at risk of missing medicines.</p>
+
+    <div id="quiz-box"></div>
+
+    <button id="next-btn" class="cta-button" style="margin-top:20px;">Next</button>
+</section>
+
+<script>
+const questions = [
+"Do you or your loved one take medicine daily?",
+"Do you miss 1–2 doses per week?",
+"Do you take more than 2 medicines?",
+"Is there any caregiver monitoring missed doses?",
+"Do you track expiry dates properly?",
+"Do you find medicine labels confusing?",
+"Do you take medicine at wrong times?",
+"Would you like caregiver SMS/phone alerts?",
+"Would you try an automatic reminder system?"
+];
+
+let index = 0;
+let score = 0;
+
+const quizBox = document.getElementById("quiz-box");
+const nextBtn = document.getElementById("next-btn");
+
+function showQuestion() {
+    quizBox.innerHTML = `
+        <h2>${index + 1}. ${questions[index]}</h2>
+        <div style="margin-top:20px;">
+            <button class="quiz-btn" onclick="selectAnswer(1)">Yes</button>
+            <button class="quiz-btn" onclick="selectAnswer(0)">No</button>
+        </div>
+    `;
+}
+
+function selectAnswer(value) {
+    score += value;
+    nextQuestion();
+}
+
+function nextQuestion() {
+    index++;
+    if (index < questions.length) {
+        showQuestion();
+    } else {
+        // final score → redirect
+        let finalScore = Math.round((score / questions.length) * 100);
+        window.location.href = `result.html?score=${finalScore}`;
+    }
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
